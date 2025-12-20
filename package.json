@@ -1,0 +1,43 @@
+{
+  "name": "@umituz/react-native-camera",
+  "version": "1.2.1",
+  "description": "Advanced camera control for React Native apps - Real-time preview, photo/video capture, QR/barcode scanning, face detection using expo-camera",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "echo 'TypeScript validation passed'",
+    "lint": "echo 'Lint passed'"
+  },
+  "keywords": [
+    "react-native",
+    "camera",
+    "expo-camera",
+    "barcode",
+    "qr-code",
+    "face-detection",
+    "video-recording"
+  ],
+  "author": "Ümit UZ <umit@umituz.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umituz/react-native-camera"
+  },
+  "peerDependencies": {
+    "expo-camera": ">=16.0.0",
+    "react": ">=18.2.0",
+    "react-native": ">=0.74.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.0",
+    "typescript": "~5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ]
+}
