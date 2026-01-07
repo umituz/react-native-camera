@@ -63,11 +63,6 @@ export interface BarcodeData {
     };
 }
 
-export interface CameraError {
-    code: string;
-    message: string;
-}
-
 export interface CameraCapabilities {
     pictureSizes: string[];
     videoQualities: VideoQuality[];

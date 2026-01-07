@@ -7,9 +7,9 @@ import {
     VideoResult,
     CameraCapabilities,
     BarcodeType,
-    CameraError,
     VideoQuality,
 } from "../../domain/entities/Camera";
+import { CameraError } from "../../domain/errors/CameraErrors";
 
 export type CameraRef = CameraView;
 
@@ -63,11 +63,7 @@ export class CameraService {
 
     async takePicture(options: PictureOptions = {}): Promise<PictureResult> {
         if (!this.cameraRef) {
-            const error: CameraError = {
-                code: "NO_CAMERA_REF",
-                message: "Camera reference not set",
-            };
-            throw error;
+            throw new CameraError("NO_CAMERA_REF", "Camera reference not set");
         }
 
         try {
@@ -95,22 +91,16 @@ export class CameraService {
             };
         } catch (error) {
             console.error("[CameraService] Error taking picture:", error);
-
-            const errorObj: CameraError = {
-                code: "PICTURE_ERROR",
-                message: error instanceof Error ? error.message : "Failed to take picture",
-            };
-            throw errorObj;
+            throw new CameraError(
+                "PICTURE_ERROR",
+                error instanceof Error ? error.message : "Failed to take picture"
+            );
         }
     }
 
     async recordVideo(options: VideoOptions = {}): Promise<VideoResult> {
         if (!this.cameraRef) {
-            const error: CameraError = {
-                code: "NO_CAMERA_REF",
-                message: "Camera reference not set",
-            };
-            throw error;
+            throw new CameraError("NO_CAMERA_REF", "Camera reference not set");
         }
 
         try {
@@ -127,11 +117,7 @@ export class CameraService {
             const result = await this.cameraRef.recordAsync(videoOptions);
 
             if (!result) {
-                const error: CameraError = {
-                    code: "VIDEO_RECORDING_FAILED",
-                    message: "Video recording failed - no result returned",
-                };
-                throw error;
+                throw new CameraError("VIDEO_RECORDING_FAILED", "Video recording failed - no result returned");
             }
 
             if (__DEV__) {
@@ -143,12 +129,10 @@ export class CameraService {
             };
         } catch (error) {
             console.error("[CameraService] Error recording video:", error);
-
-            const errorObj: CameraError = {
-                code: "VIDEO_ERROR",
-                message: error instanceof Error ? error.message : "Failed to record video",
-            };
-            throw errorObj;
+            throw new CameraError(
+                "VIDEO_ERROR",
+                error instanceof Error ? error.message : "Failed to record video"
+            );
         }
     }
 
